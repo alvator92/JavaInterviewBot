@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1623004979170-0
+      author: Alvator
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: chatId
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: firstName
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: true
+                  name: lastName
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: userName
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: registerAt
+                  type: TIMESTAMP
+            tableName: users
