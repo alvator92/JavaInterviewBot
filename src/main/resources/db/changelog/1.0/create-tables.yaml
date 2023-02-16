@@ -32,3 +32,32 @@ databaseChangeLog:
                   name: registerAt
                   type: TIMESTAMP
             tableName: users
+  - changeSet:
+      id: 1623004979170-1
+      author: Alvator
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: quest_name
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: section_name
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: true
+                  name: answer
+                  type: TEXT
+            tableName: questions
