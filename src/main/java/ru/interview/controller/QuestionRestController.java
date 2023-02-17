@@ -36,4 +36,11 @@ public class QuestionRestController {
         httpHeaders.add("Content-type","application/json; charset=utf-8");
         return new ResponseEntity<>(controller.saveAllQuestions(),httpHeaders, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/find")
+    ResponseEntity<Question> findAnswer(@RequestParam(value = "question") String question) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Content-type","application/json; charset=utf-8");
+        return new ResponseEntity<>(controller.findAnswer(question),httpHeaders, HttpStatus.OK);
+    }
 }
