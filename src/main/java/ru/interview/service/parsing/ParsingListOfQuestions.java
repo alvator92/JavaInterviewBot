@@ -33,7 +33,7 @@ public class ParsingListOfQuestions {
             Elements paragraphs = document.getElementsByTag("h4");
             for (Element paragraph : paragraphs) {
                 question = new Question();
-                question.setQuest_name(paragraph.text());
+                question.setQuest_name(paragraph.text().replaceAll("\\d+\\.\\s?", ""));
                 question.setSection_name(name);
                 listOfQuestions.add(question);
             }
