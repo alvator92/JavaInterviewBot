@@ -24,4 +24,13 @@ public class Question {
     @Column(name = "answer")
     private String answer;
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", quest_name='" + quest_name + '\'' +
+                ", section_name='" + section_name + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }

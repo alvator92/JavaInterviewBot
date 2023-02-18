@@ -25,6 +25,8 @@ spring:
       max-request-size: 5MB
 
 bot:
+  name: my_java_interview_bot
+  token: 5871503878:AAFE_lc2XOssXbCLndPwafLsotmG4RYXfHI
   owner: 1074424361
 
 upload:
