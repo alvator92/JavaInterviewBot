@@ -26,7 +26,7 @@ public class StringConstant {
 
   public static final String NO_BUTTON = "NO_BUTTON";
   public static final String ANSWER = "ОТВЕТ";
-  public static final String ANOTHER_QUESTION = "NO_BUTTON";
+  public static final String ANOTHER_QUESTION = "СЛЕДУЮЩИЙ_ВОПРОС";
 
 
   private StringConstant(){}

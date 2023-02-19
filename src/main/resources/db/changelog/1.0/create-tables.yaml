@@ -61,3 +61,32 @@ databaseChangeLog:
                   name: answer
                   type: TEXT
             tableName: questions
+  - changeSet:
+      id: 1623004979170-2
+      author: Alvator
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: chatId
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: question
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: true
+                  name: status
+                  type: TEXT
+            tableName: question_status

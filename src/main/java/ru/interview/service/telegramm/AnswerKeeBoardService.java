@@ -7,13 +7,13 @@ import ru.interview.common.StringConstant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionKeeBoardService {
+public class AnswerKeeBoardService {
 
     public static InlineKeyboardMarkup getInlineKeeBoard() {
         InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
         List<InlineKeyboardButton> rowInline = new ArrayList<>();
-        rowInline.add(getButton(StringConstant.ANSWER));
+        rowInline.add(getButton(StringConstant.ANOTHER_QUESTION));
         rowsInLine.add(rowInline);
         markupInLine.setKeyboard(rowsInLine);
 

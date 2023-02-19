@@ -31,7 +31,7 @@ public class QuestionController {
         return list;
     }
 
-    public Question findAnswer(String question) throws NoSuchElementException {
+    public Question findAnswer(String question) {
         return config.questionService().findAnswerByQuestion(question);
     }
 

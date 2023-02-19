@@ -8,8 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.interview.common.StringConstant;
 import ru.interview.enums.SectionsLinks;
 import ru.interview.model.Question;
+import ru.interview.model.Status;
 import ru.interview.service.QuestionController;
 import ru.interview.service.RandomQuestionService;
+import ru.interview.service.StatusController;
 
 import java.util.List;
 
@@ -20,6 +22,8 @@ public class CallBackController {
     private ExecutionService executionService;
     @Autowired
     private QuestionController questionController;
+    @Autowired
+    private StatusController statusController;
 
     /**
      * Получение ответа после того как пользователь нажимает кнопку ДА/НЕТ
@@ -37,7 +41,7 @@ public class CallBackController {
             String text = "Надумаешь, приходи!";
             // Обработка сообщещний по кнопке
             executionService.executionEditMessage(setCallbackMessage(messageId, chatId, text));
-        } else if (isSection(callbackData)) {
+        } else if (isSection(callbackData) || callbackData.equals(StringConstant.ANOTHER_QUESTION)) {
             String text = "ВНИМАНИЕ_ВОПРОС!";
             // Получение списка вопросов
             List<Question> listOfQuests = questionController.findQuestionBySection(callbackData);
@@ -45,11 +49,16 @@ public class CallBackController {
             executionService.executionEditMessage(CallBackQuestionController.setCallbackMessage(
                     messageId, chatId, rndQuestion.getQuestion()));
             // создание записи в таблице о том что был задан вопрос
+            statusController.registerQuestion(chatId, rndQuestion.getQuestion());
 
         } else if (callbackData.equals(StringConstant.ANSWER)) {
-            String text = "ВНИМАНИЕ_ВОПРОС!";
+            String text = "ПРАВИЛЬНЫЙ_ОТВЕТ: ";
             // получение chatId, и поиск вопроса в таблице по status = ACTIVE, chatId
-
+            Status status = statusController.findQuestionInActiveStatus(chatId);
+            Question question = questionController.findAnswer(status.getQuestion());
+            executionService.executionEditMessage(CallBackAnswerController.setCallbackMessage(
+                    messageId, chatId, question.getAnswer()));
+            statusController.closeActiveStatus(chatId);
 
         } else {
             executionService.executionEditMessage(setCallbackMessage(messageId, chatId, "Бот в помощь!"));
