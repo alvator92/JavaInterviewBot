@@ -42,8 +42,14 @@ public class CallBackController {
             // Получение списка вопросов
             List<Question> listOfQuests = questionController.findQuestionBySection(callbackData);
             Question rndQuestion = RandomQuestionService.getQuestionFromList(listOfQuests);
-            executionService.executionEditMessage(setCallbackMessage(
+            executionService.executionEditMessage(CallBackQuestionController.setCallbackMessage(
                     messageId, chatId, rndQuestion.getQuestion()));
+            // создание записи в таблице о том что был задан вопрос
+
+        } else if (callbackData.equals(StringConstant.ANSWER)) {
+            String text = "ВНИМАНИЕ_ВОПРОС!";
+            // получение chatId, и поиск вопроса в таблице по status = ACTIVE, chatId
+
 
         } else {
             executionService.executionEditMessage(setCallbackMessage(messageId, chatId, "Бот в помощь!"));
