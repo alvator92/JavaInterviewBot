@@ -30,6 +30,17 @@ public class ExecutionService {
         executeMessage(message);
     }
 
+    /**
+     * Подготовка сообщения к отправлению с клавиатурой для ответа
+     */
+    public void prepareAndSendMessage(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText("Какой раздел тебя интересует?");
+        message.setReplyMarkup(SectionKeeBoardService.getInlineKeeBoard());
+        executeMessage(message);
+    }
+
 
     public void prepareAndSendMessage(long chatId, String imagePath, String imageCaption) {
         InputFile inputFile;

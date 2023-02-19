@@ -32,7 +32,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     private FindQuestionService findQuestion;
     @Autowired
-    private CallBackResponseController callBackResponseController;
+    private CallBackController callBackController;
 
     private final BotConfiguration botConfiguration;
 
@@ -40,7 +40,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             "Ты можешь ввести следующие команды из главного меню \n\n" +
             "/start - чтобы увидеть приветствие \n\n" +
             "/find 'question' - чтобы найти нужный ответ введи вопрос через пробел \n\n" +
-            "/questions - чтобы увидеть список разделов \n\n" +
+            "/section - чтобы увидеть список разделов \n\n" +
             "/help - чтобы снова увидеть это сообщение";
 
     /**
@@ -50,7 +50,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.botConfiguration = botConfiguration;
         List<BotCommand> botCommandList = new ArrayList<>();
         botCommandList.add(new BotCommand("/start", "Привет Бот!"));
-        botCommandList.add(new BotCommand("/quests", "Выбери тему по которой ты бы хотел проверить себя"));
+        botCommandList.add(new BotCommand("/section", "Выбери тему по которой ты бы хотел проверить себя"));
         botCommandList.add(new BotCommand("/find", "Либо введи - /find 'question'"));
         botCommandList.add(new BotCommand("/help", "Как пользоваться ботом?"));
         try {
@@ -77,7 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             getMessageTextFromUser(update);
 
         } else if (update.hasCallbackQuery()) {
-            callBackResponseController.getCallbackDataFromUser(update);
+            callBackController.getCallbackDataFromUser(update);
 
         }
     }
@@ -102,6 +102,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                     // проверка пользователя на наличие в БД и создание нового
                     userController.registerUser(update.getMessage());
                     startCommandRecieved(chatId, update.getMessage().getChat().getFirstName());
+                    break;
+                case "/section" :
+                    executionService.prepareAndSendMessage(chatId);
                     break;
                 case "/help" :
                     executionService.prepareAndSendMessage(chatId, HELP_TEXT);

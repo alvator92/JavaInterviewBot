@@ -2,16 +2,13 @@ package ru.interview.service.telegramm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import ru.interview.common.StringConstant;
 
-import java.util.List;
-
 @Component
-public class CallBackResponseController {
+public class CallBackController {
 
     @Autowired
     private ExecutionService executionService;
@@ -26,7 +23,7 @@ public class CallBackResponseController {
 
         if (callbackData.equals(StringConstant.YES_BUTTON)) {
             String text = "Окей, какой раздел тебя интереусует?";
-            executionService.executionEditMessage(setCallbackMessage(messageId, chatId, text));
+            executionService.executionEditMessage(CallBackSectionController.setCallbackMessage(messageId, chatId, text));
 
         } else if (callbackData.equals(StringConstant.NO_BUTTON)) {
             String text = "Надумаешь, приходи!";
