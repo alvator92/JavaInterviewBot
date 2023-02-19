@@ -48,7 +48,7 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: quest_name
+                  name: question
                   type: TEXT
               - column:
                   constraints:

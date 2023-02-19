@@ -48,4 +48,9 @@ public class QuestionServiceImpl implements QuestionService{
         }
         return null;
     }
+
+    @Override
+    public List<Question> findQuestionBySection(String section) {
+        return repository.findAllQuestionsBySection(section);
+    }
 }

@@ -15,8 +15,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "quest_name")
-    private String quest_name;
+    @Column(name = "question")
+    private String question;
 
     @Column(name = "section_name")
     private String section_name;
@@ -28,7 +28,7 @@ public class Question {
     public String toString() {
         return "Question{" +
                 "id=" + id +
-                ", quest_name='" + quest_name + '\'' +
+                ", question='" + question + '\'' +
                 ", section_name='" + section_name + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';

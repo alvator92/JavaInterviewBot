@@ -18,5 +18,9 @@ public class FindQuestionService {
         executionService.prepareAndSendMessage(chatId, question.getAnswer());
     }
 
+    public void findQuestionsBySection() {
+
+    }
+
 
 }

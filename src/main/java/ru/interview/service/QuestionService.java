@@ -27,4 +27,6 @@ public interface QuestionService {
     List<Question> saveAll(List<Question> list);
 
     Question findAnswerByQuestion(String question);
+
+    List<Question> findQuestionBySection(String question);
 }

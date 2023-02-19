@@ -6,12 +6,20 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import ru.interview.common.StringConstant;
+import ru.interview.enums.SectionsLinks;
+import ru.interview.model.Question;
+import ru.interview.service.QuestionController;
+import ru.interview.service.RandomQuestionService;
+
+import java.util.List;
 
 @Component
 public class CallBackController {
 
     @Autowired
     private ExecutionService executionService;
+    @Autowired
+    private QuestionController questionController;
 
     /**
      * Получение ответа после того как пользователь нажимает кнопку ДА/НЕТ
@@ -29,9 +37,26 @@ public class CallBackController {
             String text = "Надумаешь, приходи!";
             // Обработка сообщещний по кнопке
             executionService.executionEditMessage(setCallbackMessage(messageId, chatId, text));
+        } else if (isSection(callbackData)) {
+            String text = "ВНИМАНИЕ_ВОПРОС!";
+            // Получение списка вопросов
+            List<Question> listOfQuests = questionController.findQuestionBySection(callbackData);
+            Question rndQuestion = RandomQuestionService.getQuestionFromList(listOfQuests);
+            executionService.executionEditMessage(setCallbackMessage(
+                    messageId, chatId, rndQuestion.getQuestion()));
+
         } else {
             executionService.executionEditMessage(setCallbackMessage(messageId, chatId, "Бот в помощь!"));
         }
+    }
+
+    private boolean isSection(String callbackData) {
+        for(SectionsLinks section : SectionsLinks.values()) {
+            if (callbackData.equals(section.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

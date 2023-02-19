@@ -27,13 +27,15 @@ public class QuestionController {
             list.addAll(listOfQuestions.getQuestion(value.getName(), value.getUrl()));
 
         }
-
         config.questionService().saveAll(list);
-
         return list;
     }
 
     public Question findAnswer(String question) throws NoSuchElementException {
         return config.questionService().findAnswerByQuestion(question);
+    }
+
+    public List<Question> findQuestionBySection(String section) {
+        return config.questionService().findQuestionBySection(section);
     }
 }
