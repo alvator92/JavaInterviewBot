@@ -25,4 +25,9 @@ public class JpaBean {
     public StatusService statusService() {
         return new StatusServiceImpl();
     }
+
+    @Bean("SectionService")
+    public SectionService sectionService() {
+        return new SectionServiceImpl();
+    }
 }

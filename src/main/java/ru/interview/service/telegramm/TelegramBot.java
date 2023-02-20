@@ -12,10 +12,9 @@ import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScope
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.interview.common.StringConstant;
 import ru.interview.configuration.BotConfiguration;
-import ru.interview.service.FindQuestionService;
-import ru.interview.service.OwnerController;
-import ru.interview.service.UserController;
+import ru.interview.service.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     private FindQuestionService findQuestion;
     @Autowired
     private CallBackController callBackController;
+    @Autowired
+    private SectionController sectionController;
+    @Autowired
+    private StatusController statusController;
 
     private final BotConfiguration botConfiguration;
 
@@ -105,6 +108,10 @@ public class TelegramBot extends TelegramLongPollingBot {
                     break;
                 case "/section" :
                     executionService.prepareAndSendMessage(chatId);
+                    // закрыть активные статусы если таковые есть
+                    sectionController.closeActiveStatus(chatId);
+                    statusController.closeActiveStatus(chatId);
+
                     break;
                 case "/help" :
                     executionService.prepareAndSendMessage(chatId, HELP_TEXT);
