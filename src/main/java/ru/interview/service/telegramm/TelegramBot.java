@@ -42,7 +42,6 @@ public class TelegramBot extends TelegramLongPollingBot {
     static final String HELP_TEXT = "Этот бот выполнен для того, чтобы помочь тебе подготовиться к Интервью по Java\n\n" +
             "Ты можешь ввести следующие команды из главного меню \n\n" +
             "/start - чтобы увидеть приветствие \n\n" +
-            "/find 'question' - чтобы найти нужный ответ введи вопрос через пробел \n\n" +
             "/section - чтобы увидеть список разделов \n\n" +
             "/help - чтобы снова увидеть это сообщение";
 
@@ -54,7 +53,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         List<BotCommand> botCommandList = new ArrayList<>();
         botCommandList.add(new BotCommand("/start", "Привет Бот!"));
         botCommandList.add(new BotCommand("/section", "Выбери тему по которой ты бы хотел проверить себя"));
-        botCommandList.add(new BotCommand("/find", "Либо введи - /find 'question'"));
         botCommandList.add(new BotCommand("/help", "Как пользоваться ботом?"));
         try {
             this.execute(new SetMyCommands(botCommandList, new BotCommandScopeDefault(), null));
